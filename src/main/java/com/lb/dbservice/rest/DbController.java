@@ -24,6 +24,12 @@ public class DbController {
   @Autowired
   UserDAO userDAO;
 
+  /**
+   * this method is used to create new user
+   * 
+   * @param userRequest
+   * @return
+   */
   @PostMapping(value = "saveUser")
   public UserResponse createUser(@RequestBody UserRequest userRequest) {
     UserResponse userResponse = new UserResponse();
