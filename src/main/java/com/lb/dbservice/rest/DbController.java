@@ -1,15 +1,14 @@
 package com.lb.dbservice.rest;
 
 import com.lb.dbservice.entity.LBUser;
-import com.lb.dbservice.exceptions.DBException;
 import com.lb.dbservice.repository.UserDAO;
 import com.lb.dbservice.rest.model.GetAllUserResponse;
+import com.lb.dbservice.rest.model.GetUsersByNameResponse;
 import com.lb.dbservice.rest.model.UserRequest;
 import com.lb.dbservice.rest.model.UserResponse;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,7 +27,7 @@ public class DbController {
    * this method is used to create new user
    * 
    * @param userRequest
-   * @return
+   * @return {@link UserResponse}
    */
   @PostMapping(value = "saveUser")
   public UserResponse createUser(@RequestBody UserRequest userRequest) {
@@ -51,6 +50,10 @@ public class DbController {
     return userResponse;
   }
 
+  /**
+   * this Method is used is Find 
+   * @return
+   */
   @GetMapping(value = "getAllUser")
   public GetAllUserResponse getAllUser() {
     GetAllUserResponse getAllUserResponse = new GetAllUserResponse();
@@ -59,8 +62,8 @@ public class DbController {
       List<LBUser> lbusers = userDAO.findAll();
       getAllUserResponse.setLbUsers(lbusers);
     } catch (Exception e) {
-      userResponse.setErrorCode("0002");
-      userResponse.setErrorMessage("Save faild");
+      userResponse.setErrorCode("0003");
+      userResponse.setErrorMessage("invalid data");
       getAllUserResponse.setUserResponse(userResponse);
       return getAllUserResponse;
     }
@@ -71,21 +74,16 @@ public class DbController {
 
   }
 
-  @GetMapping("/user/{id}")
-  public ResponseEntity<LBUser> getUserById(@PathVariable(value = "id") Integer userId)
-    throws DBException {
-    LBUser lbUser = userDAO.findById(userId).orElseThrow(() -> new DBException("User not found for this id :: " + userId));
-    return ResponseEntity.ok().body(lbUser);
-  }
-
-  @PostMapping("/employees/{id}")
-  public ResponseEntity<LBUser> updateuser(@PathVariable(value = "id") Integer userId, @RequestBody LBUser lbUser) throws DBException {
-    LBUser user = userDAO.findById(userId).orElseThrow(() -> new DBException("User not found for this id :: " + userId));
-
-    // user.setEmailId(lbUser.getEmailId());
-    // user.setLastName(lbUser.getLastName());
-    final LBUser updatedUser = userDAO.save(user);
-    return ResponseEntity.ok(updatedUser);
+  @GetMapping("/users/{name}")
+  public GetUsersByNameResponse getUsersByName(@PathVariable(value = "name") String name) {
+    GetUsersByNameResponse response = new GetUsersByNameResponse();
+    UserResponse userResponse = new UserResponse();
+    List<LBUser> userList = userDAO.findByUserName(name);
+    response.setLbUsers(userList);
+    userResponse.setErrorCode("0000");
+    userResponse.setErrorMessage("success");
+    response.setUserResponse(userResponse);
+    return response;
   }
 
 }
