@@ -20,9 +20,12 @@ public class LBUser implements Serializable {
 
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
-  @Column(name = "USER_ID")
+  @Column(name = "ID")
   @JsonIgnore
-  private int userId;
+  private int Id;
+
+  @Column(name = "USERS_ID")
+  private String usersId;
 
   @Column(name = "USER_NAME")
   private String userName;
@@ -37,17 +40,17 @@ public class LBUser implements Serializable {
   private String email;
 
   /**
-   * @return the userId
+   * @return the id
    */
-  public int getUserId() {
-    return userId;
+  public int getId() {
+    return Id;
   }
 
   /**
-   * @param userId the userId to set
+   * @param id the id to set
    */
-  public void setUserId(int userId) {
-    this.userId = userId;
+  public void setId(int id) {
+    Id = id;
   }
 
   /**
@@ -104,6 +107,20 @@ public class LBUser implements Serializable {
    */
   public void setEmail(String email) {
     this.email = email;
+  }
+
+  /**
+   * @return the usersId
+   */
+  public String getUsersId() {
+    return usersId;
+  }
+
+  /**
+   * @param usersId the usersId to set
+   */
+  public void setUsersId(String usersId) {
+    this.usersId = usersId;
   }
 
 }
