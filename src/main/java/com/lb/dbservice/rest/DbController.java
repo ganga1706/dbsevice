@@ -7,6 +7,7 @@ import com.lb.dbservice.rest.model.GetUsersByNameResponse;
 import com.lb.dbservice.rest.model.UserRequest;
 import com.lb.dbservice.rest.model.UserResponse;
 import java.util.List;
+import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -38,6 +39,7 @@ public class DbController {
       lbUser.setPassword(userRequest.getPassword());
       lbUser.setPhNumber(userRequest.getPhNumber());
       lbUser.setUserName(userRequest.getUserName());
+      lbUser.setUsersId(UUID.randomUUID().toString());
 
       userDAO.save(lbUser);
     } catch (Exception e) {
