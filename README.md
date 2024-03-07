@@ -7,3 +7,5 @@ http://localhost:9001/dbservice/rest/saveUser
 "password" : "Ganga12wdw",
 "email" :"Shiva1aaa.com"
 }
+
+------------
