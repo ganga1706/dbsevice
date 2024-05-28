@@ -58,6 +58,7 @@ public class DBConfig {
     public DataSource inMemoryDS() throws Exception {
         Random port = new SecureRandom();
         DataSource embeddedPostgresDS =
+//                EmbeddedPostgres.builder().setPort(port.nextInt(65535)).start().getPostgresDatabase();
                 new EmbeddedDatabaseBuilder()
                         .setType(EmbeddedDatabaseType.H2)
                         .build();
@@ -68,7 +69,7 @@ public class DBConfig {
     public HibernateJpaVendorAdapter jpaVendorAdapter() {
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         vendorAdapter.setDatabase(Database.H2);
-        vendorAdapter.setGenerateDdl(Boolean.FALSE);
+        vendorAdapter.setGenerateDdl(Boolean.TRUE);
         vendorAdapter.setShowSql(Boolean.TRUE);
         return vendorAdapter;
     }

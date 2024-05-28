@@ -12,7 +12,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @SpringBootApplication
 @EnableWebMvc
 @ComponentScan(basePackages = {"com.lb.dbservice.*"})
-@TestPropertySource(properties = "classpath*:application.properties")
+@TestPropertySource(properties = "classpath:application-test.properties")
 @ExtendWith(SpringExtension.class)
 public class DbserviceApplicationTest {
 

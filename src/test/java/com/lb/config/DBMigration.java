@@ -18,11 +18,11 @@ public class DBMigration {
     @Qualifier("inMemoryDS")
     DataSource dataSource;
 
-    @PostConstruct
+//    @PostConstruct
     public void migrateWithFlyway(){
         Flyway flyway = Flyway.configure()
                 .dataSource(dataSource)
-                .locations("db/migration")
+//                .locations("db/migration")
                 .load();
         flyway.repair();
         flyway.migrate();
