@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.lb</groupId>
 	<artifactId>dbservice</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>dbservice</name>
 	<description>dbservice for LB manager</description>
 
@@ -51,6 +51,8 @@
 			</exclusions>
 		</dependency>
 	</dependencies>
+
+<!--	changes are commit-->
 
 	<build>
 		<plugins>
